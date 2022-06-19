@@ -1,0 +1,40 @@
+.MODEL SMALL
+
+.STACK 100H
+
+.DATA
+
+;VARIABLES
+
+.CODE
+MAIN PROC    
+    
+; INITIALIZE DS
+    
+MOV AX, @DATA
+MOV DS, AX
+
+
+; ENTER YOUR CODE
+
+MOV AH, 1
+INT 21H
+CMP AL, 0
+JL LABEL
+JMP EXIT
+
+
+LABEL:
+MOV AX, 5   
+       
+       
+; EXIT DOS
+
+EXIT:    
+MOV AX, 4C00H
+INT 21H   
+    
+
+    
+MAIN ENDP
+END MAIN
