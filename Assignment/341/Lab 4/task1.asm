@@ -1,0 +1,38 @@
+.MODEL SMALL
+
+.STACK 100H
+
+.DATA
+
+;VARIABLES
+
+.CODE
+MAIN PROC    
+    
+; INITIALIZE DS
+    
+MOV AX, @DATA
+MOV DS, AX
+
+
+; ENTER YOUR CODE
+
+
+MOV CX, 80
+MOV AH, 2
+MOV DL, 2AH
+WHILE:
+INT 21H
+LOOP WHILE   
+       
+       
+; EXIT DOS
+
+    
+MOV AX, 4C00H
+INT 21H   
+    
+
+    
+MAIN ENDP
+END MAIN
