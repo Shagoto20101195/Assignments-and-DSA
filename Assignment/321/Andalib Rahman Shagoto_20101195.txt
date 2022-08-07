@@ -1,0 +1,124 @@
+***** CSE 321 *****
+***** Andalib Rahman Shagoto *****
+***** 20101195 *****
+***** Section - 03 *****
+
+
+***** Task 1 *****
+
+#include <stdio.h>
+
+int main()
+{
+    double r;
+    printf("Enter radius: ");
+    scanf("%lf", &r);
+    
+    printf("Diameter = %.2lf units\n", (2*r));
+    printf("Circumference = %.2lf units\n", (2*3.14*r));
+    printf("Area = %.2lf sq. units\n", (3.14*r*r));
+    return 0;
+}
+
+
+
+***** Task 2 *****
+
+#include <stdio.h>
+#include <string.h>
+
+struct Person {
+char name[50];
+int citNo;
+float salary;
+} person1;
+int main() {
+
+strcpy(person1.name, "George Orwell");
+person1.citNo = 1984;
+person1.salary = 2500.00;
+
+printf("Name: %s\n", person1.name);
+printf("Citizenship No.: %d\n", person1.citNo);
+printf("Salary: %.2f\n", person1.salary);
+
+return 0;
+}
+
+***** Task 3 *****
+
+#include <sys/types.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+int main()
+{
+pid_t child;
+int n;
+//Add additional code if required
+if((child = fork()) < 0)
+{
+printf("Error forking child.\n");
+return 1;
+}
+else if(child == 0)
+{
+    printf("Hello World! I am the new child with ID %d\n", getpid());
+}
+else
+{
+    wait();
+    printf("Goodbye World! I am the old parent with ID %d\n", getpid());
+}
+return 0;
+}
+
+
+
+***** Task 4 *****
+
+
+#include <sys/types.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <pthread.h>
+
+void *func(int n);
+
+int main(void)
+{
+    pthread_t t0, t1, t2, t3;
+    
+    pthread_create(&t0, NULL, func, 0);
+    pthread_join(t0, NULL);
+    
+    pthread_create(&t1, NULL, func, 1);
+    pthread_join(t1, NULL);
+    
+    pthread_create(&t2, NULL, func, 2);
+    pthread_join(t2, NULL);
+    
+    pthread_create(&t3, NULL, func, 3);
+    pthread_join(t3, NULL);
+}
+
+void *func(int n)
+{
+    if(n == 0)
+    {
+        printf("Thread 0 Multiples not possible\n");
+    }
+    else
+    {
+        printf("Thread %d prints", n);
+        for(int i = 1; i<=10; i++)
+        {
+            if(i % n == 0)
+            {
+                printf(" %d", i);
+            }
+        }
+        printf("\n");
+    }
+}
