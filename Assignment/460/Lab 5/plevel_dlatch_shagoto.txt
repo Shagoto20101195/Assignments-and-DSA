@@ -1,0 +1,37 @@
+// DSCH 2.7a
+// 10/29/2022 10:22:44 AM
+// D:\Shagoto\plevel_dlatch_shagoto.sch
+
+module plevel_dlatch_shagoto( clk1,D,Q_inv,Q);
+ input clk1,D;
+ output Q_inv,Q;
+ wire w8,w9,w10,w11;
+ not #(34) inverter_shagoto(w6,D);
+ nmos #(47) nmos_tw1(Q,w8,w2); //  
+ nmos #(12) nmos_tw2(w8,vss,Q_inv); //  
+ pmos #(47) pmos_tw3(Q,vdd,w2); //  
+ pmos #(47) pmos_tw4(Q,vdd,Q_inv); //  
+ nmos #(40) nmos_tw5(w2,w9,D); //  
+ nmos #(12) nmos_tw6(w9,vss,clk1); //  
+ pmos #(40) pmos_tw7(w2,vdd,D); //  
+ pmos #(40) pmos_tw8(w2,vdd,clk1); //  
+ nmos #(40) nmos_tw9(w7,w10,clk1); //  
+ nmos #(12) nmos_tw10(w10,vss,w6); //  
+ pmos #(40) pmos_tw11(w7,vdd,clk1); //  
+ pmos #(40) pmos_tw12(w7,vdd,w6); //  
+ nmos #(47) nmos_tw13(Q_inv,w11,w7); //  
+ nmos #(12) nmos_tw14(w11,vss,Q); //  
+ pmos #(47) pmos_tw15(Q_inv,vdd,w7); //  
+ pmos #(47) pmos_tw16(Q_inv,vdd,Q); //  
+ pmos #(30) pmos_in17(w6,vdd,D); //  
+ nmos #(30) nmos_in18(w6,vss,D); //  
+endmodule
+
+// Simulation parameters in Verilog Format
+always
+#1000 clk1=~clk1;
+#1000 D=~D;
+
+// Simulation parameters
+// clk1 CLK 10.00 10.00
+// D CLK 10 10
