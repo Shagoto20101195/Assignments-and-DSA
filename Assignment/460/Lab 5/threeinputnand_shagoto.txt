@@ -1,0 +1,25 @@
+// DSCH 2.7a
+// 10/29/2022 9:23:15 AM
+// D:\Shagoto\threeinputnand_shagoto.sch
+
+module threeinputnand_shagoto( C,A,B,Y);
+ input C,A,B;
+ output Y;
+ nmos #(31) nmos(Y,w1,A); // 1.0u 0.12u
+ nmos #(10) nmos(w1,w4,B); // 1.0u 0.12u
+ nmos #(10) nmos(w4,vss,C); // 1.0u 0.12u
+ pmos #(31) pmos(Y,vdd,A); // 2.0u 0.12u
+ pmos #(31) pmos(Y,vdd,B); // 2.0u 0.12u
+ pmos #(31) pmos(Y,vdd,C); // 2.0u 0.12u
+endmodule
+
+// Simulation parameters in Verilog Format
+always
+#1000 C=~C;
+#2000 A=~A;
+#4000 B=~B;
+
+// Simulation parameters
+// C CLK 10 10
+// A CLK 20 20
+// B CLK 40 40
