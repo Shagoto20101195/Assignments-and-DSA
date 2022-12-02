@@ -1,0 +1,23 @@
+// DSCH 2.7a
+// 11/6/2022 6:46:29 PM
+// D:\Program Files\DSCH2\AND_20101195.sch
+
+module AND_20101195( inp1,inp2,out);
+ input inp1,inp2;
+ output out;
+ pmos #(31) pmos(w3,vdd,inp1); // 2.0u 0.12u
+ pmos #(31) pmos(w3,vdd,inp2); // 2.0u 0.12u
+ nmos #(31) nmos(w3,w5,inp1); // 1.0u 0.12u
+ nmos #(10) nmos(w5,vss,inp2); // 1.0u 0.12u
+ nmos #(23) nmos_In1(out,vss,w3); //  
+ pmos #(23) pmos_In2(out,vdd,w3); //  
+endmodule
+
+// Simulation parameters in Verilog Format
+always
+#1000 inp1=~inp1;
+#2000 inp2=~inp2;
+
+// Simulation parameters
+// inp1 CLK 10 10
+// inp2 CLK 20 20

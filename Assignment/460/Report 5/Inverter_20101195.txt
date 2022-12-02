@@ -1,0 +1,17 @@
+// DSCH 2.7a
+// 11/6/2022 6:27:13 PM
+// D:\Program Files\DSCH2\Inverter_20101195.sch
+
+module Inverter_20101195( inp,out);
+ input inp;
+ output out;
+ nmos #(17) nmos(out,vss,inp); // 1.0u 0.12u
+ pmos #(17) pmos(out,vdd,inp); // 2.0u 0.12u
+endmodule
+
+// Simulation parameters in Verilog Format
+always
+#1000 inp=~inp;
+
+// Simulation parameters
+// inp CLK 10 10
