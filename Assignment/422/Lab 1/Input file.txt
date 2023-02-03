@@ -15,6 +15,6 @@ lasi 226 Vaslui 92 Neamt 87
 Lugoj 244 Timisoara 111 Mehadia 70
 Timisoara 329 Arad 118 Lugoj 111
 Urziceni 80 Bucharest 85 Hirsova 98 Vaslui 142
-Vaslui 199 Urziceni 142 lasi 92 
+Vaslui 199 Urziceni 142 lasi 92
 Zerind 374 Oradea 71 Arad 75
 Bucharest 0 Fagaras 211 Pitesti 101 Giurgiu 90 Urziceni 85
