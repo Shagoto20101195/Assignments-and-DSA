@@ -28,34 +28,37 @@ ns.core.LogComponentEnable("UdpEchoServerApplication", ns.core.LOG_LEVEL_INFO)
 nodes = ns.network.NodeContainer()
 nodes.Create(2)
 
+# Point to point channel
 pointToPoint = ns.point_to_point.PointToPointHelper()
-pointToPoint.SetDeviceAttribute("DataRate", ns.core.StringValue("5Mbps"))
-pointToPoint.SetChannelAttribute("Delay", ns.core.StringValue("2ms"))
+pointToPoint.SetDeviceAttribute("DataRate", ns.core.StringValue("5Mbps")) # Rate
+pointToPoint.SetChannelAttribute("Delay", ns.core.StringValue("2ms")) # 2ms gap
 
-devices = pointToPoint.Install(nodes)
+devices = pointToPoint.Install(nodes) # Installing the nodes to channel
 
 stack = ns.internet.InternetStackHelper()
-stack.Install(nodes)
+stack.Install(nodes) # nodes Installed in NIC
 
 address = ns.internet.Ipv4AddressHelper()
 address.SetBase(ns.network.Ipv4Address("10.1.1.0"),
                 ns.network.Ipv4Mask("255.255.255.0"))
 
-interfaces = address.Assign(devices)
+interfaces = address.Assign(devices) # assigned
 
+# Application create. 
+# One for server one for client. Port 9 for server.
 echoServer = ns.applications.UdpEchoServerHelper(9)
 
-serverApps = echoServer.Install(nodes.Get(1))
+serverApps = echoServer.Install(nodes.Get(1)) 
 serverApps.Start(ns.core.Seconds(1.0))
 serverApps.Stop(ns.core.Seconds(10.0))
 
 address = interfaces.GetAddress(1).ConvertTo()
-echoClient = ns.applications.UdpEchoClientHelper(address, 9)
+echoClient = ns.applications.UdpEchoClientHelper(address, 9) # Client's application, maximum packet to sent, interval and each packet size.
 echoClient.SetAttribute("MaxPackets", ns.core.UintegerValue(1))
 echoClient.SetAttribute("Interval", ns.core.TimeValue(ns.core.Seconds(1.0)))
 echoClient.SetAttribute("PacketSize", ns.core.UintegerValue(2048))
 
-clientApps = echoClient.Install(nodes.Get(0))
+clientApps = echoClient.Install(nodes.Get(0)) # Installing in first node
 clientApps.Start(ns.core.Seconds(2.0))
 clientApps.Stop(ns.core.Seconds(10.0))
 
